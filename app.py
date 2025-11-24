@@ -6,8 +6,10 @@ import base64
 import plotly.express as px
 import plotly.graph_objects as go
 
+
 # Page config
 st.set_page_config(page_title="Heart Disease Prediction", page_icon="❤️", layout="wide")
+
 
 # Custom CSS
 st.markdown("""
@@ -29,10 +31,24 @@ st.markdown("""
     .stTabs [data-baseweb="tab-list"] {
         gap: 20px;
         background: rgba(255, 255, 255, 0.02);
-        padding: 10px  20px;
+        padding: 10px 20px;
         border-radius: 20px;
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    /* Mobile responsive tabs */
+    @media (max-width: 768px) {
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 8px;
+            padding: 8px 12px;
+            flex-wrap: wrap;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            padding: 10px 16px !important;
+            font-size: 14px !important;
+        }
     }
     
     .stTabs [data-baseweb="tab"] {
@@ -72,6 +88,15 @@ st.markdown("""
         transition: all 0.3s ease;
     }
     
+    /* Mobile responsive glass card */
+    @media (max-width: 768px) {
+        .glass-card {
+            padding: 20px 16px;
+            margin: 12px 0;
+            border-radius: 16px;
+        }
+    }
+    
     .glass-card:hover {
         border: 1px solid rgba(0, 212, 255, 0.3);
         box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
@@ -86,6 +111,15 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.1);
         margin: 12px 0;
         transition: all 0.3s ease;
+    }
+    
+    /* Mobile responsive prediction card */
+    @media (max-width: 768px) {
+        .prediction-card {
+            padding: 16px;
+            margin: 8px 0;
+            border-radius: 12px;
+        }
     }
     
     .prediction-card-healthy {
@@ -110,10 +144,24 @@ st.markdown("""
         margin-bottom: 8px;
     }
     
+    /* Mobile responsive model name */
+    @media (max-width: 768px) {
+        .model-name {
+            font-size: 16px;
+        }
+    }
+    
     .prediction-result {
         font-size: 24px;
         font-weight: 700;
         margin-top: 8px;
+    }
+    
+    /* Mobile responsive prediction result */
+    @media (max-width: 768px) {
+        .prediction-result {
+            font-size: 20px;
+        }
     }
     
     .healthy-text {
@@ -138,6 +186,14 @@ st.markdown("""
         transition: all 0.3s ease;
         box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
         width: 100%;
+    }
+    
+    /* Mobile responsive button */
+    @media (max-width: 768px) {
+        .stButton > button {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
     }
     
     .stButton > button:hover {
@@ -170,6 +226,13 @@ st.markdown("""
         margin-bottom: 8px !important;
     }
     
+    /* Mobile responsive label */
+    @media (max-width: 768px) {
+        label {
+            font-size: 13px !important;
+        }
+    }
+    
     .hero-title {
         font-size: 48px;
         font-weight: 800;
@@ -181,11 +244,40 @@ st.markdown("""
         text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
     }
     
+    /* Mobile responsive hero title */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 28px !important;
+            margin-bottom: 8px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-title {
+            font-size: 24px !important;
+        }
+    }
+    
     .hero-subtitle {
         text-align: center;
         color: rgba(255, 255, 255, 0.7);
         font-size: 18px;
         margin-bottom: 40px;
+    }
+    
+    /* Mobile responsive hero subtitle */
+    @media (max-width: 768px) {
+        .hero-subtitle {
+            font-size: 14px;
+            margin-bottom: 24px;
+            padding: 0 16px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero-subtitle {
+            font-size: 13px;
+        }
     }
     
     .metric-card {
@@ -196,6 +288,15 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.1);
         text-align: center;
         transition: all 0.3s ease;
+    }
+    
+    /* Mobile responsive metric card */
+    @media (max-width: 768px) {
+        .metric-card {
+            padding: 16px 12px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
     }
     
     .metric-card:hover {
@@ -210,11 +311,27 @@ st.markdown("""
         margin: 10px 0;
     }
     
+    /* Mobile responsive metric value */
+    @media (max-width: 768px) {
+        .metric-value {
+            font-size: 24px;
+            margin: 8px 0;
+        }
+    }
+    
     .metric-label {
         font-size: 14px;
         color: rgba(255, 255, 255, 0.6);
         text-transform: uppercase;
         letter-spacing: 1px;
+    }
+    
+    /* Mobile responsive metric label */
+    @media (max-width: 768px) {
+        .metric-label {
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
     }
     
     .download-button {
@@ -229,6 +346,16 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
     }
     
+    /* Mobile responsive download button */
+    @media (max-width: 768px) {
+        .download-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            display: block;
+            text-align: center;
+        }
+    }
+    
     .download-button:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 30px rgba(0, 255, 136, 0.5);
@@ -240,12 +367,31 @@ st.markdown("""
         overflow: hidden;
     }
     
+    /* Mobile responsive data frame */
+    @media (max-width: 768px) {
+        .stDataFrame {
+            font-size: 12px;
+        }
+        
+        .stDataFrame [data-testid="stDataFrameResizable"] {
+            overflow-x: auto;
+        }
+    }
+    
     div[data-testid="stFileUploader"] {
         background: rgba(255, 255, 255, 0.03);
         border: 2px dashed rgba(0, 212, 255, 0.3);
         border-radius: 16px;
         padding: 30px;
         transition: all 0.3s ease;
+    }
+    
+    /* Mobile responsive file uploader */
+    @media (max-width: 768px) {
+        div[data-testid="stFileUploader"] {
+            padding: 20px 16px;
+            border-radius: 12px;
+        }
     }
     
     div[data-testid="stFileUploader"]:hover {
@@ -262,6 +408,15 @@ st.markdown("""
         color: white;
     }
     
+    /* Mobile responsive info box */
+    @media (max-width: 768px) {
+        .info-box {
+            padding: 16px 12px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+    }
+    
     .warning-box {
         background: linear-gradient(135deg, rgba(255, 0, 85, 0.1) 0%, rgba(255, 102, 0, 0.1) 100%);
         border-left: 4px solid #ff0055;
@@ -269,6 +424,15 @@ st.markdown("""
         padding: 20px;
         margin: 20px 0;
         color: white;
+    }
+    
+    /* Mobile responsive warning box */
+    @media (max-width: 768px) {
+        .warning-box {
+            padding: 16px 12px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
     }
     
     .success-box {
@@ -279,8 +443,50 @@ st.markdown("""
         margin: 20px 0;
         color: white;
     }
+    
+    /* Mobile responsive success box */
+    @media (max-width: 768px) {
+        .success-box {
+            padding: 16px 12px;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+    }
+    
+    /* Mobile: Stack columns vertically */
+    @media (max-width: 768px) {
+        .row-widget.stHorizontalBlock {
+            flex-direction: column !important;
+        }
+        
+        .element-container {
+            width: 100% !important;
+        }
+        
+        /* Adjust container padding for mobile */
+        .main .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            padding-top: 1rem !important;
+        }
+    }
+    
+    /* Responsive h3 headings */
+    @media (max-width: 768px) {
+        h3 {
+            font-size: 20px !important;
+        }
+    }
+    
+    /* Responsive h4 headings */
+    @media (max-width: 768px) {
+        h4 {
+            font-size: 18px !important;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 # Constants
 ALGONAMES = [
@@ -291,6 +497,7 @@ ALGONAMES = [
     "Grid Search Random Forest",
 ]
 
+
 MODELNAMES = [
     "tree.pkl",
     "LogisticRegression.pkl",
@@ -299,10 +506,12 @@ MODELNAMES = [
     "gridrf.pkl",
 ]
 
+
 EXPECTED_COLUMNS = [
     "Age","Sex","ChestPainType","RestingBP","Cholesterol",
     "FastingBS","RestingECG","MaxHR","ExerciseAngina","Oldpeak","ST_Slope"
 ]
+
 
 MODEL_ACCURACIES = {
     "Decision Tree": 80.97,
@@ -312,11 +521,13 @@ MODEL_ACCURACIES = {
     "Grid Search Random Forest": 89.75,
 }
 
+
 # Helper Functions
 def get_binary_file_downloader_html(df: pd.DataFrame) -> str:
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
     return f'<a href="data:file/csv;base64,{b64}" download="predictions.csv" class="download-button">📥 Download Predictions CSV</a>'
+
 
 def encode_single_patient(age, sex_label, chest_pain_label, resting_bp, cholesterol,
                           fasting_bs_label, resting_ecg_label, max_hr,
@@ -350,6 +561,7 @@ def encode_single_patient(age, sex_label, chest_pain_label, resting_bp, choleste
     })
     return df[EXPECTED_COLUMNS]
 
+
 def predict_all_models(single_input_df):
     preds = []
     for modelname in MODELNAMES:
@@ -360,6 +572,7 @@ def predict_all_models(single_input_df):
         except Exception:
             preds.append(np.nan)
     return preds
+
 
 def encode_bulk_dataframe(df):
     df = df.copy()
@@ -380,6 +593,7 @@ def encode_bulk_dataframe(df):
         df[col] = pd.to_numeric(df[col], errors="coerce")
     return df
 
+
 def predict_bulk_with_logreg(encoded_df):
     with open("LogisticRegression.pkl","rb") as f:
         model = pickle.load(f)
@@ -388,18 +602,22 @@ def predict_bulk_with_logreg(encoded_df):
     result["Prediction LR"] = preds
     return result
 
+
 # Header
-st.markdown('<h1 class="hero-title">❤️ Heart Disease Prediction System</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="hero-title">❤️ Heart Disease Prediction System </h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="hero-title">❤️<b> Presented By Tejas Patel, Deep Thakkar, Meet Patel, Dhruv Lalwala, Sagar Adhikari <b></h1>', unsafe_allow_html=True)
 st.markdown('<p class="hero-subtitle">Advanced AI-Powered Cardiovascular Risk Assessment</p>', unsafe_allow_html=True)
+
 
 # Tabs
 tab1, tab2, tab3 = st.tabs(["🩺 Single Prediction", "📊 Bulk Prediction", "📈 Model Information"])
+
 
 # TAB 1: Single Prediction
 with tab1:
     st.markdown("### Patient Information")
     
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 1])
     
     with col1:
         st.markdown('<div class="glass-card">', unsafe_allow_html=True)
@@ -433,7 +651,7 @@ with tab1:
             st.markdown("### 🤖 Model Predictions")
             st.markdown('<div class="info-box">Analysis complete! Results from 5 different machine learning models:</div>', unsafe_allow_html=True)
             
-            cols = st.columns(2)
+            cols = st.columns([1, 1])
             for idx, (algo, pred) in enumerate(zip(ALGONAMES, predictions)):
                 with cols[idx % 2]:
                     if pd.isna(pred):
@@ -459,6 +677,7 @@ with tab1:
                             <div style="color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 8px;">Heart disease detected</div>
                         </div>
                         ''', unsafe_allow_html=True)
+
 
 # TAB 2: Bulk Prediction
 with tab2:
@@ -520,6 +739,7 @@ with tab2:
         except Exception as e:
             st.markdown(f'<div class="warning-box">❌ Error processing file: {str(e)}</div>', unsafe_allow_html=True)
 
+
 # TAB 3: Model Information
 with tab3:
     st.markdown("### 📊 Model Performance Comparison")
@@ -579,7 +799,7 @@ with tab3:
     
     st.markdown("### 📚 Model Descriptions")
     
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1, 1])
     
     with col1:
         st.markdown('''
