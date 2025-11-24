@@ -683,7 +683,11 @@ with tab1:
 with tab2:
     st.markdown("### Upload Patient Data")
     st.markdown('<div class="info-box">Upload a CSV file with patient data for batch prediction using Logistic Regression model</div>', unsafe_allow_html=True)
-    
+    st.markdown(
+    '<div class="info-box">Download the Dataset file and upload here and Check Multiple patient Heart Disease Prediction <a href="https://drive.google.com/file/d/1Ldcc2cIrSdiwoL9NjuGczQDwUDv_yA3n/view?usp=drive_link">CLICK ME FOR DOWNLOAD DATASET</a></div>',
+    unsafe_allow_html=True
+)
+
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
     
     if uploaded_file is not None:
